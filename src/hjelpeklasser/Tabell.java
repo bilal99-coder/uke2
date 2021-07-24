@@ -61,7 +61,7 @@ public class Tabell
     // metode som finner posisjonen til den minste verdien i en tabellsintervall
     public static int min(int [] a, int fra, int til)
     {
-        if(fra < 0 || til > a.length || fra > til) // skjekker for illegale argumenter
+        if(fra < 0 || til > a.length || fra >= til) // skjekker for illegale argumenter
         {
             throw new IllegalArgumentException("Illegalt intervall");
         }
@@ -74,7 +74,7 @@ public class Tabell
                 min_verdi = a[m]; // minste verdien oppdateres
             }
         }
-        return m;
+        return m; // posisjonen til minste verdi i a[fra:til>
     }
 
     // metode som finner posisjonen til minste verdien i en tabell
@@ -87,13 +87,13 @@ public class Tabell
     // metoden skal bytte om innholdet i posisjon i og j  i char-tabellen
     public static void bytt(char[] c, int i, int j)
     {
-        char perm = c[i];
-        c[i] = c[j];
-        c[j] = c[i];
+        char perm = c[i]; c[i] = c[j]; c[j] = perm;
     }
 
     // metoden skal skrive ut tallene i intervallet a[fra:til> til konsollet
-    public static void skriv(int [] a, int fra, int til){
+    public static void skriv(int [] a, int fra, int til)
+    {
+        fratilKontroll(a.length, fra, til);
         String out = fra +"";
         for (int i = fra +1 ; i < til ; i++) {
             out += " " +i;
@@ -102,7 +102,8 @@ public class Tabell
     }
 
     // metoden skal skrive ut hele tabellen - alle på én linje, en blank mellom hvert tall
-    public static void skriv(int [] a){
+    public static void skriv(int [] a)
+    {
         skriv(a, 0, a.length);
     }
 
@@ -111,16 +112,17 @@ public class Tabell
         System.out.println();
     }
     public static void skrivln(int [] a){
-        skriv(a, 0, a.length);
-        System.out.println();
+        skrivln(a, 0, a.length);
     }
 
 
     // metoden skal skrive ut char-ene i intervallet c[fra:til> til konsollet
-    public static void skriv(char [] c, int fra, int til){
-        String out = fra +"";
+    public static void skriv(char [] c, int fra, int til)
+    {
+        fratilKontroll(c.length, fra, til);
+        String out = c[fra] +"";
         for (int i = fra +1 ; i < til ; i++) {
-            out += " " +i;
+            out += " " + c[i];
         }
         System.out.println(out);
     }
@@ -136,8 +138,7 @@ public class Tabell
         System.out.println();
     }
     public static void skrivln(char [] c){
-        skriv(c, 0, c.length);
-        System.out.println();
+        skrivln(c, 0, c.length);
     }
 
     public static int [] naturligeTall(int n)
@@ -148,17 +149,30 @@ public class Tabell
         return a;
     }
 
-    public static int[] naturligeTall(int fra, int til){
-        if (fra> til ) throw new  IllegalArgumentException("Illegalt argument");
+    public static int[] heleTall(int fra, int til){
+        if (fra> til ) throw new  IllegalArgumentException("fra(" + fra + ") > til(" + til + ")");
         if (fra == til) return new int [0];
-        int [] a = new int [til-fra];
-        int j = 0;
+        int [] a = new int [til - fra];
         for (int i = fra  ;i<til; i++) {
-            a[j] = i;
-            j++;
+            a[i-fra] = i;
         }
         return a;
     }
 
+    // Følgende metode tester om det halvåpne tabellintervallet a[fra:til> er lovlig
 
+    public static void fratilKontroll(int tablengde, int fra, int til)
+    {
+        if(fra < 0)    // fra er negativ
+            throw new ArrayIndexOutOfBoundsException
+                    ("(fra(" + fra +") er negativ!");
+
+        if (til > tablengde)   // til er utenfor tabellen
+            throw new ArrayIndexOutOfBoundsException
+                    ("til(" + til +") er negativ!");
+
+        if (fra > til)
+            throw new IllegalArgumentException
+                    ("fra(" + fra + ") > til(" + til +") - illegalt intervall!");
+    }
 }
