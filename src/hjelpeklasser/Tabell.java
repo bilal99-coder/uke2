@@ -1,4 +1,4 @@
-package UkeOppgaver2.hjelpeklasser;
+package hjelpeklasser;
 import java.util.*;
 
 public class Tabell
@@ -16,9 +16,9 @@ public class Tabell
         int [] a = new int [n];
         Random r = new Random();
         Arrays.setAll(a, i -> i+1);
-        for (int k = n-1; k> 0; k--)
+        for (int k = n-1; k > 0; --k)
         {
-            int i = r.nextInt(k-1); // tilfeldig tall fra 0 til k
+            int i = r.nextInt(k+1); // tilfeldig tall fra 0 til k
             bytt(a, k, i);
         }
         return a;
@@ -84,12 +84,81 @@ public class Tabell
     }
 
 
-
-
-    public static void main(String[] args) {
-        int[] a = {11,5,8,6,99,2,1,8,55,1,4,3,6,25,8,2,78,30};
-        System.out.println(global_min(a));
-        System.out.println(a[global_min(a)]);
-
+    // metoden skal bytte om innholdet i posisjon i og j  i char-tabellen
+    public static void bytt(char[] c, int i, int j)
+    {
+        char perm = c[i];
+        c[i] = c[j];
+        c[j] = c[i];
     }
+
+    // metoden skal skrive ut tallene i intervallet a[fra:til> til konsollet
+    public static void skriv(int [] a, int fra, int til){
+        String out = fra +"";
+        for (int i = fra +1 ; i < til ; i++) {
+            out += " " +i;
+        }
+        System.out.println(out);
+    }
+
+    // metoden skal skrive ut hele tabellen - alle på én linje, en blank mellom hvert tall
+    public static void skriv(int [] a){
+        skriv(a, 0, a.length);
+    }
+
+    public static void skrivln(int []a ,int fra, int til){
+        skriv(a,fra,til);
+        System.out.println();
+    }
+    public static void skrivln(int [] a){
+        skriv(a, 0, a.length);
+        System.out.println();
+    }
+
+
+    // metoden skal skrive ut char-ene i intervallet c[fra:til> til konsollet
+    public static void skriv(char [] c, int fra, int til){
+        String out = fra +"";
+        for (int i = fra +1 ; i < til ; i++) {
+            out += " " +i;
+        }
+        System.out.println(out);
+    }
+
+    // metoden skal skrive ut hele tabellen - alle på én linje, en blank mellom hvert char
+    public static void skriv(char [] c){
+        skriv(c, 0, c.length);
+    }
+
+    // skrivln metode fungerer på samme måte som skriv-metoden men utskriften skal avsluttes med et linjeskift
+    public static void skrivln(char [] c ,int fra, int til){
+        skriv(c,fra,til);
+        System.out.println();
+    }
+    public static void skrivln(char [] c){
+        skriv(c, 0, c.length);
+        System.out.println();
+    }
+
+    public static int [] naturligeTall(int n)
+    {
+        if(n< 1) throw new IllegalArgumentException("Illegalt argument");
+        int [] a = new int [n];
+        Arrays.setAll(a, i -> i+1);
+        return a;
+    }
+
+    public static int[] naturligeTall(int fra, int til){
+        if (fra> til ) throw new  IllegalArgumentException("Illegalt argument");
+        if (fra == til) return new int [0];
+        int [] a = new int [til-fra];
+        int j = 0;
+        for (int i = fra  ;i<til; i++) {
+            a[j] = i;
+            j++;
+        }
+        return a;
+    }
+
+
 }
