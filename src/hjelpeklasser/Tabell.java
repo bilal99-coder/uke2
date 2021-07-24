@@ -131,6 +131,7 @@ public class Tabell
 
     // skrivln metode fungerer på samme måte som skriv-metoden men utskriften skal avsluttes med et linjeskift
     public static void skrivln(char [] c ,int fra, int til){
+        fratilKontroll(c.length,fra, til);
         skriv(c,fra,til);
         System.out.println();
     }
@@ -140,7 +141,7 @@ public class Tabell
 
     public static int [] naturligeTall(int n)
     {
-        if(n< 1) throw new IllegalArgumentException("Illegalt argument");
+        fratilKontroll(n,0, n);
         int [] a = new int [n];
         Arrays.setAll(a, i -> i+1);
         return a;
@@ -187,8 +188,40 @@ public class Tabell
             throw new ArrayIndexOutOfBoundsException
                     ("h(" + h + ") >= tablengde(" + tablengde + ")");
 
-        if (v >= h + 1)
+        if (v > h + 1)
             throw new IllegalArgumentException
                     ("v = " + v + ", h = " + h);
     }
+
+    //  Metoden skal snu rekkefølgen på verdiene i intervallet a[v:h]. Hvis intervallet f.eks. inneholder verdiene 4, 2, 13, 7, skal intervallet etter et kall på metodene inneholde 7, 13, 2, 4
+
+    public static void snu(int [] a, int v, int h){
+        vhKontroll(a.length, v, h);
+        for (int i = h; i >((h-v) /2 ) ; i--) {
+            int temp = a[i];
+            a[i] = a[h-i];
+            a[h-i] = temp;
+        }
+        for (int k : a){
+            System.out.print(k +" ");
+        }
+    }
+
+    // metoden skal snu reekkefølgen på verdien i tabellen
+    public static void snu(int []a){
+        snu(a, 0, a.length-1);
+    }
+
+    public static void snu(char [] c, int v, int h){
+        vhKontroll(c.length, v, h);
+        while(v < h){
+            bytt(c,v++,h--);
+        }
+    }
+    public static void snu(char [] c){
+        snu(c,0,c.length-1);
+    }
+
+
+
 }
