@@ -6,5 +6,8 @@ public class Program {
 
         int m = Tabell.maks(a); // finner posisjinen til den største verdi
         System.out.println("\nStørste verdi ligger på plass " + m);
+
+        int m1 = Tabell.maks(a, -5, -5);
+        System.out.println("Posisjonen til størst verdien i arrayet er: " + m1);
     } // main
 } // class Program

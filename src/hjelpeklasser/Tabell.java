@@ -37,10 +37,10 @@ public class Tabell
 
     // metoden som returnerer posisjonen til den største verdien i et intervall
     public static int maks(int [] a, int fra, int til){
-        if(fra < 0 || til> a.length || fra > til)
-        {
-            throw new IllegalArgumentException("Illegalt intervall");
-        }
+
+        if (a == null) throw new NullPointerException
+                ("parametertabellen a er null!");
+        fratilKontroll(a.length,fra, til);
         int m = fra; // indeks til maks verdi
         int maks_verdi = a[fra];
 
@@ -61,10 +61,7 @@ public class Tabell
     // metode som finner posisjonen til den minste verdien i en tabellsintervall
     public static int min(int [] a, int fra, int til)
     {
-        if(fra < 0 || til > a.length || fra >= til) // skjekker for illegale argumenter
-        {
-            throw new IllegalArgumentException("Illegalt intervall");
-        }
+        fratilKontroll(a.length, fra, til);
         int m = fra; // indeks til minste verdien
         int min_verdi = a[fra]; // minste verdien
         for (int i = fra + 1 ; i < til ; ++i){
@@ -119,7 +116,7 @@ public class Tabell
     // metoden skal skrive ut char-ene i intervallet c[fra:til> til konsollet
     public static void skriv(char [] c, int fra, int til)
     {
-        fratilKontroll(c.length, fra, til);
+        fratilKontroll( c.length, fra, til);
         String out = c[fra] +"";
         for (int i = fra +1 ; i < til ; i++) {
             out += " " + c[i];
@@ -163,16 +160,35 @@ public class Tabell
 
     public static void fratilKontroll(int tablengde, int fra, int til)
     {
+        if (fra == til)
+            throw new NoSuchElementException
+                    ("fra(" + fra + ") = til(" + til + ") - tomt tabellintervall!");
+
+
         if(fra < 0)    // fra er negativ
             throw new ArrayIndexOutOfBoundsException
-                    ("(fra(" + fra +") er negativ!");
+                    ("fra(" + fra +") er negativ!");
 
         if (til > tablengde)   // til er utenfor tabellen
             throw new ArrayIndexOutOfBoundsException
-                    ("til(" + til +") er negativ!");
+                    ("til(" + til +") > tablengde(" +tablengde +")");
 
         if (fra > til)
             throw new IllegalArgumentException
                     ("fra(" + fra + ") > til(" + til +") - illegalt intervall!");
+    }
+
+    public static void vhKontroll(int tablengde, int v, int h)
+    {
+        if (v < 0)
+            throw new ArrayIndexOutOfBoundsException("v(" + v + ") < 0");
+
+        if (h >= tablengde)
+            throw new ArrayIndexOutOfBoundsException
+                    ("h(" + h + ") >= tablengde(" + tablengde + ")");
+
+        if (v >= h + 1)
+            throw new IllegalArgumentException
+                    ("v = " + v + ", h = " + h);
     }
 }
