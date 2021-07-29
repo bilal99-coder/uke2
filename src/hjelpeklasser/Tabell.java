@@ -223,5 +223,40 @@ public class Tabell
     }
 
 
+    // ******* oppgaver til avsnittet 1.2.4 *******
+
+    // metode som finner posisjonen til den neste største verdien i en tabell
+    // Metoden tar et array som argument, kaller på maks() for å finne posisjonen til den største veriden i tabellen.
+    // Den nest største finner vi som den største blant resten av verdiene.
+    // metoden returnerer et array som har posisjon til største verdi og til den neste største
+
+
+    int [] nestMaks(int [] a){
+        int n = a.length; // tabellens lengde
+        if(a.length < 2) // må ha minst to verdier
+        {
+            throw new NoSuchElementException("a.length (" + n +")< 2!");
+        }
+        int mn; // posisjonen til den neste sørste verdien
+        int m = maks(a);  // er posisjonen til største verdien
+        if(m == 0) // største verdien ligger først
+        {
+            mn = maks(a,1,m); // leter i a[1: m>
+        }
+        else if (m == n-1) // størst ligger bakkerst
+        {
+            mn = maks(a, 0, n-1); // leter i a[0:n-1>
+        }
+
+        else
+        {
+            int mv = maks(a,0,m); // leter i a[0:m>
+            int mh = maks(a,m+1,n); // leter i a[m+1,n>
+            mn = a[mv] > a[mh] ? mv:mh; // hvem er størst?
+        }
+        return new int [] {m , mn}; // m i posisjonen 0, mn i posisjonen 1
+    }
+
+
 
 }
