@@ -258,6 +258,20 @@ public class Tabell
         return new int [] {m , mn}; // m i posisjonen 0, mn i posisjonen 1
     }
 
+//  versjon 2 av nestmaks-metoden der du bytter om slik at den største kommer forrest.
 
+    public static int[] nestMaks_v2(int [] a){
+        int n = a.length; // tabellens lengde
+        if(a.length < 2) // må ha minst to verdier
+        {
+            throw new NoSuchElementException("a.length (" + n +")< 2!");
+        }
+        int mn; // posisjonen til den neste sørste verdien
+        int m = maks(a);  // er posisjonen til største verdien
+        bytt(a,0,m); // største verdien ligger først
+        mn = maks(a,1,n); // leter i a[1: n>
+
+        return new int [] {m , mn}; // m i posisjonen 0, mn i posisjonen 1
+    }
 
 }

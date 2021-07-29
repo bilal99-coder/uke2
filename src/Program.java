@@ -22,5 +22,16 @@ public class Program {
         System.out.println("Største verdien i tabellen er: " +c[maks]  + " og ligger i plassen: " + maks);
         System.out.println("Største verdien i tabellen er: " +c[nm]  + " og ligger i plassen: " + nm);
 
+        System.out.println("************ ____________************");
+        System.out.println("bruke nestMaks v2");
+
+        int maks_v2 = Tabell.nestMaks_v2(c)[0] ; // returner posisjonen til største verdi i tabellen
+        int nm_v2 = Tabell.nestMaks_v2(c)[1]; // returnerer posisjonen til nest største verdi i tabellen
+
+        if(maks == maks_v2 && nm == nm_v2) {
+            System.out.println("maks( " + maks +") = maks_v2(" +maks_v2 + ") AND nm( " + nm + ") = nm_v2(" +nm_v2 +")");
+        }
+        else System.out.println("maks og maks_v2 er ikke like");
+
     } // main
 } // class Program
