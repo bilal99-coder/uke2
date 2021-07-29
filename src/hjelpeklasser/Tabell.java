@@ -91,11 +91,12 @@ public class Tabell
     public static void skriv(int [] a, int fra, int til)
     {
         fratilKontroll(a.length, fra, til);
-        String out = fra +"";
+        if (til - fra > 0) System.out.print(a[fra]);
+
         for (int i = fra +1 ; i < til ; i++) {
-            out += " " +i;
+            System.out.print(" " + a[i]);
         }
-        System.out.println(out);
+
     }
 
     // metoden skal skrive ut hele tabellen - alle på én linje, en blank mellom hvert tall
@@ -231,7 +232,7 @@ public class Tabell
     // metoden returnerer et array som har posisjon til største verdi og til den neste største
 
 
-    int [] nestMaks(int [] a){
+    public static int [] nestMaks(int[] a){
         int n = a.length; // tabellens lengde
         if(a.length < 2) // må ha minst to verdier
         {
