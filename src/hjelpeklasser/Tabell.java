@@ -242,7 +242,7 @@ public class Tabell
         int m = maks(a);  // er posisjonen til største verdien
         if(m == 0) // største verdien ligger først
         {
-            mn = maks(a,1,m); // leter i a[1: m>
+            mn = maks(a,1,n-1); // leter i a[1: m>
         }
         else if (m == n-1) // størst ligger bakkerst
         {
@@ -271,7 +271,29 @@ public class Tabell
         bytt(a,0,m); // største verdien ligger først
         mn = maks(a,1,n); // leter i a[1: n>
 
+        if (mn == m) mn = 0; // den nest største lå opprinnelig forrest
+
+        Tabell.bytt(a,0,m); // bytter tilbake
+
         return new int [] {m , mn}; // m i posisjonen 0, mn i posisjonen 1
     }
+    public static int[] nestMaks3(int[] a)
+    {
+        if (a.length < 2) // må ha minst to verdier!
+            throw new IllegalArgumentException("a.length(" + a.length + ") < 2!");
+
+        int m = Tabell.maks(a);  // m er posisjonen til tabellens største verdi
+
+        Tabell.bytt(a,0,m);  // bytter om slik at den største kommer forrest
+
+        int k = Tabell.maks(a,1,a.length);
+
+        if (k == m) k = 0; // den nest største lå opprinnelig forrest
+
+        Tabell.bytt(a,0,m); // bytter tilbake
+
+        return new int[] {m,k};
+
+    } // nestMaks
 
 }
