@@ -37,15 +37,7 @@ public class Program {
 
         System.out.println("Test 3 ********************");
 
-        int [] z = {20,5,4,3,2,19,8,6,9};
-        int maks_3_3  = Tabell.nestMaks3(z)[0];
-        int nm3_3 = Tabell.nestMaks3(z)[1];
 
-        int maks_3_1  = Tabell.nestMaks(z)[0];
-        int nm3_3_1 = Tabell.nestMaks(z)[1];
-
-        System.out.println("med bruk av nestMaks3 så er maks: " + maks_3_3  + " og neste maks: " + nm3_3);
-        System.out.println("med bruk av vanlig nestMaks så er maks: " + maks_3_1 + " og neste maks: " + nm3_3_1);
 
 
     } // main
