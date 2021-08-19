@@ -1,6 +1,8 @@
 import hjelpeklasser.*;
 import jdk.swing.interop.SwingInterOpUtils;
 
+import java.util.Arrays;
+
 public class Program {
     public static void main (String ... args){
       /*  int [] a = Tabell.randPerm(12); // en tilfeldig tabell
@@ -36,6 +38,12 @@ public class Program {
         else System.out.println("maks og maks_v2 er ikke like");
 
         System.out.println("Test 3 ********************");
+
+        // Test for Avsnittet 1.2.13
+        int [] e = Tabell.randPerm(20);
+        System.out.println("This is the generated array of 20 elemnts");
+        System.out.println(Arrays.toString(e));
+        Tabell.nestMaks_Turnering(e);
 
 
 

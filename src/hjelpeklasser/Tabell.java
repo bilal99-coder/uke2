@@ -307,4 +307,47 @@ public class Tabell {
 
     } // Ferdig med seksjon 1.2.4
 
+    // Avsnitt 1.2.13
+    // ** Andre oppgaver fra dette avsnittet er lagt på noteboken **
+
+    // Oppgave 1
+
+    public static void nestMaks_Turnering (int [] a) //en turnering
+    {
+        int n = a.length; // for å forenkle notasjonen
+
+        if (n < 2) // må ha minst to verdier!
+            throw new IllegalArgumentException("a.length(" +n + ") < 2!");
+        int [] b = new int [2*n]; // turneringstreet
+        System.arraycopy(a,0,b,n,n); // legger a bakerst i b
+
+        for (int k = 2*n-2; k >1;  k -=2) // lager turneringstreet
+        { b[k/2] = Math.max(b[k],b[k+1]);}
+
+        System.out.println(Arrays.toString(b));
+        // setning som skriver ut tabellen b etter ut turneringen er gjennomført
+        int maksverdi = b[1], nestmaksverdi = Integer.MIN_VALUE;
+
+        // finner nå nestMaksverdi
+
+        for (int m = 2*n -1, k = 2; k <m; k *=2)
+        {
+            int tempverdi = b[k+1]; // ok hvis maksverdi er b[k]
+            if (maksverdi != b[k]) { tempverdi = b[k]; k++; }
+            if (tempverdi > nestmaksverdi) nestmaksverdi = tempverdi;
+        }
+
+        System.out.println(Arrays.toString(new int [] {maksverdi, nestmaksverdi})); // størst og nest størst
+
+    } // nestMaks_Turnering
+
+    // Oppgave 2
+    // La Programkode 1.2.13 a) returnere indeksene til størst og nest størst verdi.
+
+   // ???
+    // Oppgave 3
+    public static void kopier (int [] a, int i, int [] b, int j, int ant)
+    {
+        for (int n = i + ant; i< n; ) b[j++] = a[i++];
+    }
 }
